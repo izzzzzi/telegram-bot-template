@@ -5,7 +5,13 @@ from typing import Any, Awaitable, Callable, TypeVar
 from aiogram.types import CallbackQuery, Message
 
 from bot.analytics.amplitude import AmplitudeTelegramLogger
-from bot.analytics.types import AbstractAnalyticsLogger, BaseEvent, EventProperties, EventType, UserProperties
+from bot.analytics.types import (
+    AbstractAnalyticsLogger,
+    BaseEvent,
+    EventProperties,
+    EventType,
+    UserProperties,
+)
 from bot.core.config import settings
 from bot.utils.singleton import SingletonMeta
 
@@ -28,9 +34,13 @@ class AnalyticsService(metaclass=SingletonMeta):
     def track_event(self, event_name: EventType) -> Callable:
         """Decorator for tracking events in Amplitude, Google Analytics or Posthog."""
 
-        def decorator(handler: Callable[[Message | CallbackQuery, dict[str, Any]], Awaitable[Any]]) -> Callable:
+        def decorator(
+            handler: Callable[[Message | CallbackQuery, dict[str, Any]], Awaitable[Any]]
+        ) -> Callable:
             @wraps(handler)
-            async def wrapper(update: Message | CallbackQuery, *args: dict[str, T]) -> T | None:
+            async def wrapper(
+                update: Message | CallbackQuery, *args: dict[str, T]
+            ) -> T | None:
                 if (isinstance(update, (Message, CallbackQuery))) and update.from_user:
                     user_id = update.from_user.id
                     first_name = update.from_user.first_name
@@ -45,7 +55,11 @@ class AnalyticsService(metaclass=SingletonMeta):
                     chat_id = update.chat.id
                     chat_type = update.chat.type
                     text = update.text
-                    command = update.text if update.text and update.text.startswith("/") else None
+                    command = (
+                        update.text
+                        if update.text and update.text.startswith("/")
+                        else None
+                    )
                 elif isinstance(update, CallbackQuery):
                     chat_id = update.message.chat.id if update.message else None
                     chat_type = update.message.chat.type if update.message else None
@@ -83,4 +97,7 @@ class AnalyticsService(metaclass=SingletonMeta):
         return decorator
 
 
-analytics = AnalyticsService(AmplitudeTelegramLogger(api_token=settings.AMPLITUDE_API_KEY))
+if settings.AMPLITUDE_API_KEY:
+    analytics = AnalyticsService(
+        AmplitudeTelegramLogger(api_token=settings.AMPLITUDE_API_KEY)
+    )

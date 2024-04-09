@@ -8,12 +8,13 @@ def main_keyboard() -> InlineKeyboardMarkup:
     buttons = [
         [InlineKeyboardButton(text=_("wallet button"), callback_data="wallet")],
         [InlineKeyboardButton(text=_("premium button"), callback_data="premium")],
+        [InlineKeyboardButton(text=_("choose language"), callback_data="language")],
         [InlineKeyboardButton(text=_("info button"), callback_data="info")],
         [InlineKeyboardButton(text=_("support button"), callback_data="support")],
     ]
 
     keyboard = InlineKeyboardBuilder(markup=buttons)
 
-    keyboard.adjust(1, 1, 2)
+    keyboard.adjust(1, 1, 1, 2)
 
     return keyboard.as_markup()

@@ -45,12 +45,18 @@ class ChannelSubscribeMiddleware(BaseMiddleware):
                 except TelegramNotFound:
                     return False
 
-                if member.status in (ChatMemberStatus.LEFT, ChatMemberStatus.KICKED, ChatMemberStatus.RESTRICTED):
+                if member.status in (
+                    ChatMemberStatus.LEFT,
+                    ChatMemberStatus.KICKED,
+                    ChatMemberStatus.RESTRICTED,
+                ):
                     return False
 
         elif isinstance(self.chat_ids, (str, int)):
             try:
-                member = await bot(GetChatMember(chat_id=self.chat_ids, user_id=user_id))
+                member = await bot(
+                    GetChatMember(chat_id=self.chat_ids, user_id=user_id)
+                )
             except TelegramNotFound:
                 return False
 

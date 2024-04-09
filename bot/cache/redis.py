@@ -23,7 +23,10 @@ def build_key(*args: tuple[str, Any], **kwargs: dict[str, Any]) -> str:
 
 
 async def set_redis_value(
-    key: bytes | str, value: bytes | str, ttl: int | timedelta | None = DEFAULT_TTL, is_transaction: bool = False
+    key: bytes | str,
+    value: bytes | str,
+    ttl: int | timedelta | None = DEFAULT_TTL,
+    is_transaction: bool = False,
 ) -> None:
     """Set a value in Redis with an optional time-to-live (TTL)."""
     async with redis_client.pipeline(transaction=is_transaction) as pipeline:
@@ -61,9 +64,7 @@ def cached(
 
             # Store the result in Redis
             await set_redis_value(
-                key=key,
-                value=serializer.serialize(result),
-                ttl=ttl,
+                key=key, value=serializer.serialize(result), ttl=ttl,
             )
 
             return result
@@ -73,11 +74,7 @@ def cached(
     return decorator
 
 
-async def clear_cache(
-    func: Callable,
-    *args: Any,
-    **kwargs: Any,
-) -> None:
+async def clear_cache(func: Callable, *args: Any, **kwargs: Any,) -> None:
     """Clear the cache for a specific function and arguments.
 
     Parameters

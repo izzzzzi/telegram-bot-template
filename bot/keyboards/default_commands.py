@@ -32,18 +32,9 @@ users_commands: dict[str, dict[str, str]] = {
 
 admins_commands: dict[str, dict[str, str]] = {
     **users_commands,
-    "en": {
-        "ping": "Check bot ping",
-        "stats": "Show bot stats",
-    },
-    "uk": {
-        "ping": "Check bot ping",
-        "stats": "Show bot stats",
-    },
-    "ru": {
-        "ping": "Check bot ping",
-        "stats": "Show bot stats",
-    },
+    "en": {"ping": "Check bot ping", "stats": "Show bot stats",},
+    "uk": {"ping": "Check bot ping", "stats": "Show bot stats",},
+    "ru": {"ping": "Check bot ping", "stats": "Show bot stats",},
 }
 
 

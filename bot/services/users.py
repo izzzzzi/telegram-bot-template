@@ -11,11 +11,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
-async def add_user(
-    session: AsyncSession,
-    user: User,
-    referrer: str | None,
-) -> None:
+async def add_user(session: AsyncSession, user: User, referrer: str | None,) -> None:
     """Add a new user to the database."""
     user_id: int = user.id
     first_name: str = user.first_name
@@ -71,11 +67,13 @@ async def get_language_code(session: AsyncSession, user_id: int) -> str:
 
 
 async def set_language_code(
-    session: AsyncSession,
-    user_id: int,
-    language_code: str,
+    session: AsyncSession, user_id: int, language_code: str,
 ) -> None:
-    stmt = update(UserModel).where(UserModel.id == user_id).values(language_code=language_code)
+    stmt = (
+        update(UserModel)
+        .where(UserModel.id == user_id)
+        .values(language_code=language_code)
+    )
 
     await session.execute(stmt)
     await session.commit()

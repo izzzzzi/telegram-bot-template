@@ -23,8 +23,7 @@ redis_client = Redis(
 )
 
 storage = RedisStorage(
-    redis=redis_client,
-    key_builder=DefaultKeyBuilder(with_bot_id=True),
+    redis=redis_client, key_builder=DefaultKeyBuilder(with_bot_id=True),
 )
 
 dp = Dispatcher(storage=storage)

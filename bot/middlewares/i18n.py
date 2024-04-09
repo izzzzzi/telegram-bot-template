@@ -27,13 +27,17 @@ if TYPE_CHECKING:
 class ACLMiddleware(I18nMiddleware):
     DEFAULT_LANGUAGE_CODE = "en"
 
-    async def get_locale(self, event: Message | CallbackQuery | InlineQuery, data: dict[str, Any]) -> str:
+    async def get_locale(
+        self, event: Message | CallbackQuery | InlineQuery, data: dict[str, Any]
+    ) -> str:
         session: AsyncSession = data["session"]
 
         if not event.from_user:
             return self.DEFAULT_LANGUAGE_CODE
 
         user_id = event.from_user.id
-        language_code: str | None = await get_language_code(session=session, user_id=user_id)
+        language_code: str | None = await get_language_code(
+            session=session, user_id=user_id
+        )
 
         return language_code or self.DEFAULT_LANGUAGE_CODE

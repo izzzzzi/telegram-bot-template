@@ -14,8 +14,11 @@ METRICS_PREFIX = "tgbot"
 
 
 def prometheus_middleware_factory(
-    metrics_prefix: str = METRICS_PREFIX, registry: prometheus_client.CollectorRegistry | None = None
-) -> Callable[[Request, Callable[[Request], Awaitable[Response]]], Coroutine[Any, Any, Response]]:
+    metrics_prefix: str = METRICS_PREFIX,
+    registry: prometheus_client.CollectorRegistry | None = None,
+) -> Callable[
+    [Request, Callable[[Request], Awaitable[Response]]], Coroutine[Any, Any, Response]
+]:
     used_registry = registry or prometheus_client.REGISTRY
 
     requests_metrics = prometheus_client.Counter(
@@ -56,7 +59,9 @@ def prometheus_middleware_factory(
     )
 
     @middleware
-    async def prometheus_middleware(request: Request, handler: Callable[[Request], Awaitable[Response]]) -> Response:
+    async def prometheus_middleware(
+        request: Request, handler: Callable[[Request], Awaitable[Response]]
+    ) -> Response:
         loop = asyncio.get_running_loop() or asyncio.get_event_loop()
 
         try:

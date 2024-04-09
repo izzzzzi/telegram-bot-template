@@ -73,9 +73,7 @@ async def setup_webhook() -> None:
     )
 
     webhook_requests_handler = SimpleRequestHandler(
-        dispatcher=dp,
-        bot=bot,
-        secret_token=settings.WEBHOOK_SECRET,
+        dispatcher=dp, bot=bot, secret_token=settings.WEBHOOK_SECRET,
     )
     webhook_requests_handler.register(app, path=settings.WEBHOOK_PATH)
     setup_application(app, dp, bot=bot)
@@ -91,8 +89,7 @@ async def setup_webhook() -> None:
 async def main() -> None:
     if settings.SENTRY_DSN:
         sentry_loguru = LoguruIntegration(
-            level=LoggingLevels.INFO.value,
-            event_level=LoggingLevels.INFO.value,
+            level=LoggingLevels.INFO.value, event_level=LoggingLevels.INFO.value,
         )
         sentry_sdk.init(
             dsn=settings.SENTRY_DSN,

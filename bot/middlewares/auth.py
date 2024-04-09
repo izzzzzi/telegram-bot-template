@@ -36,7 +36,9 @@ class AuthMiddleware(BaseMiddleware):
 
         referrer = find_command_argument(message.text)
 
-        logger.info(f"new user registration | user_id: {user.id} | message: {message.text}")
+        logger.info(
+            f"new user registration | user_id: {user.id} | message: {message.text}"
+        )
 
         await add_user(session=session, user=user, referrer=referrer)
 

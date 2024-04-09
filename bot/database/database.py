@@ -3,8 +3,13 @@ from typing import TYPE_CHECKING
 from uuid import uuid4
 
 from asyncpg import Connection
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
-
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
+from bot.database.models import Base
 from bot.core.config import settings
 
 if TYPE_CHECKING:
@@ -17,14 +22,15 @@ class CConnection(Connection):
 
 
 def get_engine(url: URL | str = settings.database_url) -> AsyncEngine:
-    return create_async_engine(
-        url=url,
-        echo=settings.DEBUG,
-        pool_size=0,
-        connect_args={
-            "connection_class": CConnection,
-        },
-    )
+    if url.startswith("sqlite"):
+        return create_async_engine(url=url, echo=settings.DEBUG,)
+    else:
+        return create_async_engine(
+            url=url,
+            echo=settings.DEBUG,
+            pool_size=0,
+            connect_args={"connection_class": CConnection,},
+        )
 
 
 def get_sessionmaker(engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:

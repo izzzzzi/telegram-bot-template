@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages. VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-15 12:58+0400\n"
-"PO-Revision-Date: 2024-01-14 14:51+0400\n"
+"POT-Creation-Date: 2024-04-08 18:48+0300\n"
+"PO-Revision-Date: 2024-04-08 18:49+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
 "Language-Team: uk <LL@li.org>\n"
@@ -17,52 +17,46 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: bot/handlers/export_users.py:29
 msgid "user counter: <b>{count}</b>"
-msgstr ""
+msgstr "лічильник користувачів: <b>{count}</b>"
 
 #: bot/handlers/info.py:11
 msgid "about"
-msgstr ""
+msgstr "про"
 
-#: bot/handlers/menu.py:13 bot/handlers/start.py:16
+#: bot/handlers/menu.py:13
 msgid "title main keyboard"
-msgstr ""
+msgstr "заголовок головної клавіатури"
+
+#: bot/handlers/start.py:15
+msgid "first message"
+msgstr "перше повідомлення"
 
 #: bot/handlers/support.py:13
 msgid "support text"
-msgstr ""
+msgstr "текст підтримки"
 
 #: bot/keyboards/inline/contacts.py:11 bot/keyboards/inline/contacts.py:22
 #: bot/keyboards/inline/menu.py:12
 msgid "support button"
-msgstr ""
+msgstr "кнопка підтримки"
 
 #: bot/keyboards/inline/contacts.py:23
 msgid "back button"
-msgstr ""
+msgstr "кнопка назад"
 
 #: bot/keyboards/inline/menu.py:9
 msgid "wallet button"
-msgstr ""
+msgstr "кнопка гаманця"
 
 #: bot/keyboards/inline/menu.py:10
 msgid "premium button"
-msgstr ""
+msgstr "кнопка преміуму"
 
 #: bot/keyboards/inline/menu.py:11
 msgid "info button"
-msgstr ""
+msgstr "кнопка інформації"
 
-#: bot/middlewares/auth.py:41
-msgid "first message"
-msgstr ""
-
-#~ msgid ""
-#~ "👋 <b>Добро пожаловать в бот.</b>\n"
-#~ "<i>Это сообщение появляет только один раз</i>\n"
-#~ "\n"
-#~ "Чтобы начать пользоваться ботом можете начать с /menu"
-#~ msgstr ""

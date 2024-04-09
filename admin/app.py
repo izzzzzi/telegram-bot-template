@@ -60,7 +60,11 @@ class AdminModel(db.Model, UserMixin):
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime(), default=datetime.utcnow)
     fs_uniquifier = db.Column(db.String(255), unique=True)
-    roles = db.relationship("RoleModel", secondary=roles_admins, backref=db.backref("admins", lazy="dynamic"))
+    roles = db.relationship(
+        "RoleModel",
+        secondary=roles_admins,
+        backref=db.backref("admins", lazy="dynamic"),
+    )
 
     def __str__(self) -> str:
         return self.email
@@ -128,7 +132,11 @@ def get_user_count() -> int:
 
 def get_new_user_count(days_before: int = 1) -> int:
     period_start = datetime.now(timezone.utc) - timedelta(days=days_before)
-    return db.session.query(AppUserModel).filter(AppUserModel.created_at >= period_start).count()
+    return (
+        db.session.query(AppUserModel)
+        .filter(AppUserModel.created_at >= period_start)
+        .count()
+    )
 
 
 class CustomAdminIndexView(AdminIndexView):
@@ -222,8 +230,12 @@ def init_db() -> None:
 
     db.create_all()
 
-    admin_role = RoleModel(name="user", description="does not have access to other administrators")
-    super_admin_role = RoleModel(name="superuser", description="has access to manage all administrators")
+    admin_role = RoleModel(
+        name="user", description="does not have access to other administrators"
+    )
+    super_admin_role = RoleModel(
+        name="superuser", description="has access to manage all administrators"
+    )
     db.session.add(admin_role)
     db.session.add(super_admin_role)
     db.session.commit()
@@ -244,4 +256,8 @@ with app.app_context():
     init_db()
 
 if __name__ == "__main__":
-    app.run(host=app.config.get("ADMIN_HOST"), port=app.config.get("ADMIN_PORT"), debug=app.config.get("DEBUG"))
+    app.run(
+        host=app.config.get("ADMIN_HOST"),
+        port=app.config.get("ADMIN_PORT"),
+        debug=app.config.get("DEBUG"),
+    )

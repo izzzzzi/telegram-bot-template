@@ -75,13 +75,17 @@
     ```bash
     poetry run alembic upgrade head
     ```
+-   create tables (from sqlite)
+    ```bash
+    poetry run alembic revision --autogenerate -m "Added user table"
+    ```
 
 ## 🌍 Environment variables
 
 to launch the bot you only need a token bot, database and redis settings, everything else can be left out
 
 | name                     | description                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------- |
+| ------------------------ |---------------------------------------------------------------------------------------------|
 | `BOT_TOKEN`              | Telegram bot API token                                                                      |
 | `RATE_LIMIT`             | Maximum number of requests allowed per minute for rate limiting                             |
 | `DEBUG`                  | Enable or disable debugging mode (e.g., `True` or `False`)                                  |
@@ -97,6 +101,7 @@ to launch the bot you only need a token bot, database and redis settings, everyt
 | `DEFAULT_ADMIN_PASSWORD` | Default password for the admin user                                                         |
 | `SECURITY_PASSWORD_HASH` | Hashing algorithm for user passwords (e.g., `bcrypt`)                                       |
 | `SECURITY_PASSWORD_SALT` | Salt value for user password hashing                                                        |
+| `USE_SQLITE`                | Flag to uses sqlite (e.g., `True` or `False`)                                               |
 | `DB_HOST`                | Hostname or IP address of the PostgreSQL database                                           |
 | `DB_PORT`                | Port number for the PostgreSQL database                                                     |
 | `DB_USER`                | Username for authenticating with the PostgreSQL database                                    |
